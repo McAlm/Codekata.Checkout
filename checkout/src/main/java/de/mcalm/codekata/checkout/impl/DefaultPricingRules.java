@@ -1,4 +1,4 @@
-package de.mcalm.codekata.checkout;
+package de.mcalm.codekata.checkout.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,18 +6,20 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Supplier;
 
+import de.mcalm.codekata.checkout.api.PricingRules;
+
 public class DefaultPricingRules implements PricingRules {
 
-	private RuleSet ruleSet;
+	private DefaultRuleSet ruleSet;
 
-	public DefaultPricingRules(Supplier<RuleSet> rulesSupplier) {
+	public DefaultPricingRules(Supplier<DefaultRuleSet> rulesSupplier) {
 		this.ruleSet = rulesSupplier.get();
 	}
 
 	@Override
 	public Double calculate(String item, Integer amount) {
 		
-		Map<Integer, Double> pricesForItem = this.ruleSet.getPricesForItem(item);
+		Map<Integer, Double> pricesForItem = this.ruleSet.getPriceRules(item);
 
 		Optional<Integer> maxDiscountStep = pricesForItem.keySet().stream().max(Integer::compare);
 		return calculateInternal(maxDiscountStep.get(), amount, pricesForItem);

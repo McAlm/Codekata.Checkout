@@ -1,4 +1,4 @@
-package de.mcalm.codekata.checkout;
+package de.mcalm.codekata.checkout.util;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,14 +15,14 @@ public class JsonUtil {
 
 		try {
 			ObjectMapper mapper = new ObjectMapper();
-			// Map<String, Map<String, Double>> rules = mapper
-			// .readValue(new
-			// File("C:\\Users\\wiese\\eclipse-workspace\\checkout\\rules.json"),
-			// HashMap.class);
+
 			Map<String, Map<String, Double>> rules = mapper.readValue(json, Map.class);
 
 			Set<Entry<String, Map<String, Double>>> entrySet = rules.entrySet();
 
+			// ugly workaround to fix jacksons behaviour to instantiate map keys always as
+			// string
+			// could be fixed by introducing a CustomMapper
 			Map<String, Map<Integer, Double>> rulesToReturn = new HashMap<>();
 			for (Entry<String, Map<String, Double>> entry : entrySet) {
 				String item = entry.getKey();

@@ -6,6 +6,8 @@ import org.easymock.EasyMock;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.mcalm.codekata.checkout.api.PricingRules;
+
 public class CheckoutTest {
 
 	private Checkout co;

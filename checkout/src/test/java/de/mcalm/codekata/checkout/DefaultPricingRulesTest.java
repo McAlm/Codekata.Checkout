@@ -8,6 +8,9 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+import de.mcalm.codekata.checkout.impl.DefaultPricingRules;
+import de.mcalm.codekata.checkout.impl.DefaultRuleSet;
+
 public class DefaultPricingRulesTest {
 
 	private DefaultPricingRules calculator;
@@ -17,7 +20,7 @@ public class DefaultPricingRulesTest {
 		this.calculator = new DefaultPricingRules(this::getTestRules);
 	}
 
-	private RuleSet getTestRules() {
+	private DefaultRuleSet getTestRules() {
 		Map<String, Map<Integer, Double>> prices = new HashMap<>();
 		Map<Integer, Double> pricesA = new HashMap<>();
 		pricesA.put(1, 10.0);
@@ -26,7 +29,7 @@ public class DefaultPricingRulesTest {
 
 		prices.put("A", pricesA);
 
-		return new RuleSet(prices);
+		return new DefaultRuleSet(prices);
 	}
 
 	@Test
