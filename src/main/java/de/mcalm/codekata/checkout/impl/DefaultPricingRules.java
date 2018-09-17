@@ -36,11 +36,11 @@ public class DefaultPricingRules implements PricingRules {
 		if (discountStep == 0)
 			return 0.0;
 		if (amount > discountStep) {
-			return ((int) (amount / discountStep)) * Optional.ofNullable(pricesForItem.get(discountStep)).orElse(0.0)
+			return ((int) (amount / discountStep)) * pricesForItem.getOrDefault(discountStep, 0.0)
 					+ calculateInternal(discountStep - 1, amount % discountStep, pricesForItem);
 
 		} else if (amount == discountStep && pricesForItem.get(discountStep) != null) {
-			return pricesForItem.get(discountStep);
+			return pricesForItem.getOrDefault(discountStep, 0.0);
 
 		} else {
 			return calculateInternal(discountStep - 1, amount, pricesForItem);
