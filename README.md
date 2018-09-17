@@ -1,7 +1,7 @@
 # Codekata.Checkout
 A codekata which calculates all items in a shopping cart at checkout.
 
-The project has a strong focus on decoupling. It was developed mainly by using TDD. It is quite flexible to replace the pricing rules and the according calculation implementation by introducing another PricingRule implementation. Also so project offers the flexibility to replace the mechanism where to load pricing rules from at the initialisation of a checkout process. Currently there is a fixed Map used for tests and for the App a json String is parsed. Later on it could be extended by using a database, in e.g. This was achieved by using a Supplier<RuleSet> which is in charge to provide the pricing rules data.
+The project has a strong focus on decoupling. It was developed mainly by using TDD. It is quite flexible to replace the pricing rules and the according calculation implementation by introducing another PricingRule implementation. Also the project offers the flexibility to replace the mechanism where to load pricing rules from at the initialisation of a checkout process. Currently there is a fixed Map used for tests and for the App a json String is parsed. Later on it could be extended by using a database, in e.g. This was achieved by using a Supplier<RuleSet> which is in charge to provide the pricing rules data.
 
 The project sturcture looks like:
 src/de.mcalm.codekata.checkout
