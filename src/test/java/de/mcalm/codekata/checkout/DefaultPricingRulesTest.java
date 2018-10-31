@@ -2,8 +2,16 @@ package de.mcalm.codekata.checkout;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -42,5 +50,21 @@ public class DefaultPricingRulesTest {
 		assertEquals("Should sum: 1 * 45.0 + 2 * 10.0", 65.0, this.calculator.calculate("A", 7));
 		assertEquals("Should sum: 3 * 45.0 + 2 * 10.0", 155.0, this.calculator.calculate("A", 17));
 		assertEquals("Should sum: 3 * 45.0 + 1 * 25.0 + 1 * 10.0", 170.0, this.calculator.calculate("A", 19));
+	}
+	
+	
+	@Test
+	public void testRecursionWithLambda() {
+		Map<Integer, Double> map = this.getTestRules().getPriceRules("A");
+		Integer amount = 8;
+		
+		Optional<Integer> max = map.keySet().stream().max(Integer::compare);
+		IntStream.range(0, max.get()).boxed().forEach(i -> map.putIfAbsent(i,  0.0));
+		
+		System.out.println(map.size());
+		
+		Double collect = map.keySet().stream().sorted(Collections.reverseOrder(Integer::compare)).collect(Collectors.summingDouble(i -> amount ));
+		System.out.println("Collected: " + collect);
+		
 	}
 }

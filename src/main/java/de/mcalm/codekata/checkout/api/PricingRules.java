@@ -11,5 +11,7 @@ public interface PricingRules {
 	 * @return
 	 */
 	public Double calculate(String item, Integer amount);
+	
+	public RuleSet getRuleset();
 
 }

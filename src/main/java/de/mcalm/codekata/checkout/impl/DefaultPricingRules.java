@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.function.Supplier;
 
 import de.mcalm.codekata.checkout.api.PricingRules;
+import de.mcalm.codekata.checkout.api.RuleSet;
 
 public class DefaultPricingRules implements PricingRules {
 
@@ -45,6 +46,11 @@ public class DefaultPricingRules implements PricingRules {
 		} else {
 			return calculateInternal(discountStep - 1, amount, pricesForItem);
 		}
+	}
+
+	@Override
+	public RuleSet getRuleset() {
+		return this.ruleSet;
 	}
 
 }
